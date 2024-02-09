@@ -34,7 +34,7 @@ axios.interceptors.response.use(
 
 export const useTodos = () => {
     return useSuspenseQuery(({
-        queryKey: [getTodosQueryKey.queryKey!],
+        queryKey: getTodosQueryKey.queryKey!,
         queryFn: async () => {
             const response = await axios.get('/api/todo', {
                 headers: { ...getAuthHeaders()}
