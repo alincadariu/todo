@@ -2,6 +2,66 @@
 
 In a world full of tasks, deadlines, and the occasional forgotten grocery item, having a Todo Web API at your disposal can be a game-changer. Whether you're organizing your own life or building the next big productivity app, this guide will walk you through the process.
 
+# Day 2
+
+## Setting up SQL Server in Docker and Connecting with VSCode
+for windows: https://learn.microsoft.com/en-us/ef/core/get-started/overview/first-app?tabs=netcore-cli
+
+### Step 1: Docker Setup
+- If you don’t have it yet, please download and install Docker for Mac.
+- Pull the SQL Server image for Linux:
+  ```bash
+  docker pull mcr.microsoft.com/mssql/server:2022-latest
+  ```
+- Create a container:
+  ```bash
+  docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=1StrongPassword!' -p 1433:1433 --name mssql1 -d mcr.microsoft.com/mssql/server:2022-latest
+  ```
+
+### Step 2: Connecting with VSCode
+- Make sure Docker extension in VSCode is installed.
+- Ensure the container is running smoothly (look for the green symbol).
+- Use the SQL Server extension in VSCode to connect to the localhost.
+
+## Installing Required Packages
+
+### Step 1: Essential Packages
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+```
+
+### Step 2: Design Package for Migrations
+```bash
+dotnet tool install --global dotnet-ef
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
+
+## Creating Data Model and Migration
+
+### Step 1: DBContext Setup
+- Implement your Todo data model.
+- Prepare your SQLContext class which implements DBContext class.
+
+### Step 2: Generating Migration
+```bash
+dotnet ef migrations add InitialCreate
+```
+This magic will create C# code to conjure up your database schema.
+
+and now run 
+
+```bash 
+dotnet ef database update
+```
+to create your tables
+
+## Implementing CRUD Operations and Testing
+
+- Get ready to dive into coding your CRUD operations in your `TodoSQLRepository`.
+- Test it out to make sure your SQL sorcery works flawlessly!
+
+And remember, even though it seems like I'm endorsing Microsoft with all this, I promise I'm not on their payroll... yet! 😄
+
 # Day 1
 Congratulations on embarking on this journey to build your very own Todo Web API using controllers and file storage with .NET 8 and C#! 
 
@@ -116,3 +176,4 @@ Inversion of Control is a design principle where the control of flow is inverted
 A DTO is a design pattern used to transfer data between software application subsystems. DTOs are typically simple data structures that contain only fields and no business logic. They facilitate the transfer of data between different layers of an application, such as between a controller and a service in a TODO web API, helping to decouple components and improve maintainability.
 
 ![rest-api](https://gist.github.com/assets/17832522/69fafa6d-0b13-4152-b608-a0db0aeecb17.png)
+
