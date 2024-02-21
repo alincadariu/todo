@@ -2,6 +2,57 @@
 
 In a world full of tasks, deadlines, and the occasional forgotten grocery item, having a Todo Web API at your disposal can be a game-changer. Whether you're organizing your own life or building the next big productivity app, this guide will walk you through the process.
 
+# Day 3
+
+**Adding Authentication and Authorization to Todo Web API in .NET 8**
+
+This ReadMe will guide you through the process of adding authentication and authorization to your Todo Web API using .NET 8. We'll implement external authentication with Google, utilize JWT tokens, and set up authorization policies to restrict access to endpoints.
+
+## 1. External Authentication with Google
+
+We'll rely on Google for authentication and to provide us with JWT tokens. 
+
+## 2. Use 'Authorize' Attribute on Endpoints
+
+Ensure that you apply the `[Authorize]` attribute to the endpoints that require authentication and authorization. This attribute ensures that only authenticated users can access those endpoints.
+
+## 3. Add JwtBearer as a Service in Program.cs
+
+In your `Program.cs` file, configure JwtBearer authentication to validate JWT tokens from Google.
+
+```csharp
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options => {
+      // add config
+    });
+```
+
+## 4. Add a New 'Users' Table in Your Database and File System
+
+Keep in mind, we first need to add a migration to existing db. 
+
+https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+
+Create a new table named 'Users' in your database where you'll store authenticated users. This table should contain fields like UserID, Email, and any other relevant information obtained from Google during authentication.
+
+Also, implement this under the file system storage.
+
+## 5. Implement Authorization Policies
+
+Implement authorization policies to restrict access to certain endpoints based on user roles or ownership. For example, to restrict write operations for non-owners of todo items:
+
+```csharp
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("OwnerPolicy", policy =>
+          policy.Requirements.Add(new OwnerRequirement()));
+});
+```
+
+You would also need to implement the `IAuthorizationRequirement` interface for the `OwnerRequirement` and handle the authorization logic accordingly.
+
+With these steps completed, your Todo Web API will now have authentication and authorization functionalities integrated, ensuring secure access to your endpoints. 🎉
+
 # Day 2
 
 ## Setting up SQL Server in Docker and Connecting with VSCode
