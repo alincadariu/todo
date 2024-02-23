@@ -1,0 +1,6 @@
+@WorkSharp.API_HostAddress = http://localhost:5252
+
+GET {{WorkSharp.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
