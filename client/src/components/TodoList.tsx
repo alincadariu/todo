@@ -8,6 +8,7 @@ import { useTodos } from '../services/useTodos';
 import { useCreateTodo } from '../services/useCreateTodo';
 import { useUpdateTodo } from '../services/useUpdateTodo';
 import { useDeleteTodo } from '../services/useDeleteTodo';
+import { GoogleLogin } from '@react-oauth/google';
 
 const FlexRowWrapper = styled.div`
    display: flex;
@@ -39,12 +40,12 @@ export const TodoList = () => {
     const deleteTodo = useDeleteTodo();
 
     return <Wrapper>
-        {/* <GoogleLogin
+        <GoogleLogin
             useOneTap={true}
             onSuccess={(credentialResponse) => {
                 sessionStorage.setItem('token', credentialResponse.credential!);
             }}
-        /> */}
+        />
         <FlexRowWrapper>
             <Text fontSize='5xl' as='b'>My tasks</Text>
             <IconButton 
