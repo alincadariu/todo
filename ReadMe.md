@@ -2,6 +2,55 @@
 
 In a world full of tasks, deadlines, and the occasional forgotten grocery item, having a Todo Web API at your disposal can be a game-changer. Whether you're organizing your own life or building the next big productivity app, this guide will walk you through the process.
 
+# Day 4
+## How to Set Up a Todo App with MongoDB in C#
+
+Welcome to the world of Todo apps, where keeping track of your tasks is as important as procrastinating on them! In this guide, we'll embark on a journey to connect our Todo app to MongoDB, because why not add some database excitement to our productivity quests?
+
+### Step 1: Connect to MongoDB Cluster
+
+First things first, let's establish a connection to our MongoDB cluster. Don't worry, we're not going to climb any mountains; just follow these simple steps:
+
+#### Program.cs
+
+In your `Program.cs` file, add the following snippet:
+
+Create TodoContext and add it to your MongoDB project
+```csharp
+dotnet add package MongoDB.EntityFrameworkCore --version 7.0.0-preview.1
+```
+```csharp
+dotnet add package MongoDB.Driver
+```
+```csharp
+builder.Services.AddDbContext<>(options =>
+    options.UseMongoDB(atlasURI, databaseName));
+```
+
+Feel free to replace `atlasURI` and `databaseName` with your actual MongoDB Atlas URI and desired database name. And remember, even if your tasks are out of this world, your database connection doesn't have to be!
+
+### Step 2: Create Todo.MongoDB Project
+
+Now, let's dive deeper into the MongoDB realm by creating a dedicated project for our MongoDB-related functionalities:
+
+#### Todo.MongoDB
+
+Go ahead, create that project. Call it `Todo.MongoDB`. After all, every Todo app needs a Mongo sidekick to handle those data shenanigans!
+
+### Step 3: Implement TodoMongoDBRepository
+
+It's time to give life to our `TodoMongoDBRepository`. This is where the magic happens. Well, maybe not *actual* magic, but close enough in the coding world!
+
+### Step 4: Use Dependency Injection (DI)
+
+Injecting dependencies is like giving your app a shot of espresso—it wakes things up! Let's inject our `TodoMongoDBRepository` into the veins of our program:
+
+#### Program.cs (Again)
+
+In your `Program.cs`, use Dependency Injection to inject `TodoMongoDBRepository` as a repository. Because why manually manage tasks when you can let DI do the heavy lifting, right?
+
+And there you have it! With these steps, your Todo app is now synced up with MongoDB, ready to handle all your tasks 🚀📝
+
 # Day 3
 
 **Adding Authentication and Authorization to Todo Web API in .NET 8**
